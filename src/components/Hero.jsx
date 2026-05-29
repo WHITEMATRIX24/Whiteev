@@ -167,48 +167,6 @@ export default function Hero() {
           }}>
             Receive a WHITE EV card through a participating partner, link your wallet, and tap to charge across every integrated network — with seamless authentication and automatic payment settlement.
           </motion.p>
-
-          <motion.div variants={fadeUp} style={{ display: 'flex', gap: '0.875rem', flexWrap: 'wrap' }}>
-            <a href="#cta" style={{
-              display: 'inline-flex', alignItems: 'center', gap: '8px',
-              padding: '0.875rem 1.75rem', borderRadius: '10px',
-              background: 'white',
-              color: '#1048C0', fontWeight: 700, fontSize: '0.925rem',
-              textDecoration: 'none', letterSpacing: '-0.01em',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,1)',
-              transition: 'box-shadow 0.2s, transform 0.2s',
-            }}
-              onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 16px 48px rgba(0,0,0,0.3)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-              onMouseLeave={e => { e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.25)'; e.currentTarget.style.transform = 'translateY(0)' }}
-            >
-              Find a Partner
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </a>
-            <a href="#how-it-works" style={{
-              display: 'inline-flex', alignItems: 'center',
-              padding: '0.875rem 1.5rem', borderRadius: '10px',
-              border: '1px solid rgba(255,255,255,0.25)',
-              background: 'rgba(255,255,255,0.08)',
-              color: 'rgba(255,255,255,0.88)', fontWeight: 500, fontSize: '0.925rem',
-              textDecoration: 'none', letterSpacing: '-0.01em',
-              backdropFilter: 'blur(8px)',
-              transition: 'background 0.2s, border-color 0.2s',
-            }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.15)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)' }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)' }}
-            >
-              How It Works
-            </a>
-          </motion.div>
-
-          <motion.div variants={fadeUp} style={{ display: 'flex', gap: '2rem', paddingTop: '0.25rem' }}>
-            {[{ v: '10K+', l: 'Stations' }, { v: '50K+', l: 'Active Cards' }, { v: '99.9%', l: 'Uptime' }].map(s => (
-              <div key={s.v}>
-                <div style={{ color: 'white', fontWeight: 700, fontSize: '1.2rem', letterSpacing: '-0.02em' }}>{s.v}</div>
-                <div style={{ color: 'rgba(255,255,255,0.42)', fontSize: '0.72rem', letterSpacing: '0.04em' }}>{s.l}</div>
-              </div>
-            ))}
-          </motion.div>
         </motion.div>
 
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>

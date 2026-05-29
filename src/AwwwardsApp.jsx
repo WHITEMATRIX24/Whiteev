@@ -6,7 +6,7 @@ import Hero from './components/Hero'
 import NetworkBar from './components/NetworkBar'
 import HowItWorks from './components/HowItWorks'
 import ProductFeatures from './components/ProductFeatures'
-import StatsSection from './components/StatsSection'
+import SessionDashboard from './components/SessionDashboard'
 import FaqSection from './components/FaqSection'
 import CtaSection from './components/CtaSection'
 import Footer from './components/Footer'
@@ -27,7 +27,7 @@ export default function App() {
             <NetworkBar />
             <HowItWorks />
             <ProductFeatures />
-            <StatsSection />
+            <SessionDashboard />
             <FaqSection />
             <CtaSection />
           </main>
