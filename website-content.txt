@@ -1,0 +1,319 @@
+============================================
+WHITE EV - WEBSITE CONTENT
+============================================
+
+============================================
+BRAND NAME & TAGLINE
+============================================
+Brand: WHITE EV
+Tagline: One Card. Every Charger.
+
+
+============================================
+NAVIGATION LINKS
+============================================
+- Features
+- How it Works
+- NFC Card
+- Pricing
+- Download App (CTA Button)
+
+
+============================================
+HERO SECTION
+============================================
+Main Headline:
+ONE CARD.
+EVERY CHARGER.
+
+Subheadline:
+Charge at 10,000+ stations nationwide with one universal NFC card. No apps, no hassle, just tap and charge.
+
+CTA Button: Get Started Free
+
+Trust Indicators:
+- 50,000+ drivers already charging
+- ⭐⭐⭐⭐⭐ 4.9/5 rating
+- 10,000+ charging stations
+
+
+============================================
+INFINITE MARQUEE TEXT
+============================================
+CHARGE ANYWHERE • ONE TAP ACCESS • FREE NFC CARD • UNIVERSAL NETWORK • 10,000+ STATIONS • INSTANT PAYMENT • CHARGE ANYWHERE • ONE TAP ACCESS • FREE NFC CARD • UNIVERSAL NETWORK • 10,000+ STATIONS • INSTANT PAYMENT
+
+
+============================================
+HOW IT WORKS
+============================================
+Section Title: How It Works
+Section Subtitle: Get charging in three simple steps
+
+Step 01: Download the App
+Download the WHITE EV app from the App Store or Google Play to get started.
+
+Step 02: Order Your Free Card
+Request your free NFC card through the app. Shipping takes 3-5 business days.
+
+Step 03: Tap & Charge Anywhere
+Simply tap your card at any compatible charging station and start charging instantly.
+
+
+============================================
+NFC CARD SHOWCASE
+============================================
+Section Title: Your Universal Charging Key
+Section Subtitle: One card to access every charging network
+
+NFC Card Details:
+Brand Name on Card: WHITE EV
+Card Subtitle: UNIVERSAL CHARGING
+
+Features:
+1. Instant Access
+   Tap and start charging in seconds at any compatible station
+
+2. Secure Payments
+   Bank-level encryption protects every transaction
+
+3. Real-time Tracking
+   Monitor your charging sessions and costs in the app
+
+4. Universal Network
+   Works with all major charging networks nationwide
+
+Banner Text: Get Your FREE NFC Card
+Banner Subtext: No activation fees. No monthly charges. Just pay for the energy you use.
+
+
+============================================
+APP FEATURES
+============================================
+Section Title: Everything You Need
+Section Subtitle: A powerful app that makes charging effortless
+
+Feature 1: Find Chargers
+Icon: Map Pin
+Locate nearby charging stations with real-time availability
+
+Feature 2: Quick Payments
+Icon: Credit Card
+Seamless payment processing with automatic receipts
+
+Feature 3: Track Usage
+Icon: Activity
+Monitor your charging history and energy consumption
+
+Feature 4: Price Comparison
+Icon: Dollar Sign
+Compare prices across stations to find the best rates
+
+Feature 5: Session Control
+Icon: Zap
+Start, stop, and monitor charging sessions remotely
+
+Feature 6: 24/7 Support
+Icon: Headphones
+Get help anytime with our dedicated support team
+
+
+============================================
+METRICS GRID
+============================================
+Metric 1:
+10,000+
+Charging Stations
+Nationwide coverage
+
+Metric 2:
+50,000+
+Happy Drivers
+Join the community
+
+Metric 3:
+99.9%
+Uptime
+Always available
+
+Metric 4:
+4.9/5
+App Rating
+Top-rated experience
+
+
+============================================
+PRICING
+============================================
+Section Title: Simple, Transparent Pricing
+Section Subtitle: Choose the plan that fits your charging needs
+
+PLAN 1: Pay As You Go
+Price: $0/month
+Features:
+✓ Free NFC card
+✓ Access to all 10,000+ stations
+✓ Pay per kWh used
+✓ Basic app features
+✓ Standard support
+CTA: Get Started
+
+PLAN 2: Premium (POPULAR)
+Price: $9.99/month
+Features:
+✓ Everything in Free
+✓ 15% discount on all charging
+✓ Priority customer support
+✓ Advanced analytics
+✓ Charging history export
+✓ Free card replacement
+CTA: Start Premium
+
+PLAN 3: Family
+Price: $19.99/month
+Features:
+✓ Everything in Premium
+✓ Up to 5 NFC cards
+✓ 20% discount on all charging
+✓ Shared payment method
+✓ Family usage dashboard
+✓ Dedicated account manager
+CTA: Start Family
+
+
+============================================
+FAQ SECTION
+============================================
+Section Title: Frequently Asked Questions
+Section Subtitle: Everything you need to know about charging with WHITE EV
+
+Q1: How do I get started with WHITE EV?
+A1: Getting started is easy! Download the WHITE EV app from the App Store or Google Play, create an account, and order your free NFC card. Once your card arrives, you can start charging at any of our 10,000+ partner stations nationwide.
+
+Q2: Is the NFC card really free?
+A2: Yes! Your first NFC card is completely free with no activation fees or monthly charges. You only pay for the electricity you use when charging. Premium and Family plan members also get free card replacements if needed.
+
+Q3: Where can I use my WHITE EV card?
+A3: Your WHITE EV card works at over 10,000 charging stations across the country from multiple networks. Use our app to find nearby compatible chargers, check availability, and see real-time pricing before you charge.
+
+Q4: What if I don't have my card with me?
+A4: No problem! You can also start charging sessions directly through the WHITE EV mobile app. Just scan the QR code at the charger or select it from the map. The app works even when your card isn't nearby.
+
+Q5: How does billing work?
+A5: We charge your linked payment method after each charging session. You'll see the exact cost before you start charging, and you can track all your transactions in the app. Premium members get automatic discounts on every session.
+
+
+============================================
+CTA SECTION
+============================================
+Main Headline:
+START CHARGING
+EVERYWHERE
+
+Subheadline:
+Join 50,000+ drivers who've unlocked universal EV charging access. Download the app and get your free NFC card today.
+
+CTA Buttons:
+- Download App
+- iOS & Android
+
+Trust Indicators:
+- iOS & Android
+- ★★★★★ 4.9/5 rating
+- 50,000+ downloads
+
+
+============================================
+FOOTER
+============================================
+
+Brand Section:
+WHITE EV
+The interoperability backbone for EV charging networks. Powering seamless transactions across operators.
+
+Product Links:
+- Features
+- NFC Card
+- Pricing
+- Download App
+
+Resources Links:
+- Help Center
+- Station Map
+- Support
+- FAQ
+
+Company:
+WhiteMatrix Solutions
+Building the future of EV charging interoperability.
+
+Social Media:
+- GitHub
+- LinkedIn
+- Twitter
+
+Bottom Bar:
+© 2026 WhiteMatrix Solutions. All rights reserved.
+- Privacy Policy
+- Terms of Service
+
+
+============================================
+ADDITIONAL COPY VARIATIONS
+============================================
+
+Alternative Headlines:
+- "Universal Charging. One Tap Away."
+- "Every Network. One Card."
+- "Charge Everywhere. Pay Anywhere."
+
+Alternative CTAs:
+- "Start Charging Free"
+- "Get Your Free Card"
+- "Join 50K+ Drivers"
+- "Download Now"
+
+Value Propositions:
+- "No more juggling multiple apps and cards"
+- "Access every major charging network with one card"
+- "Bank-level security for every transaction"
+- "Real-time pricing and availability"
+- "24/7 customer support"
+
+
+============================================
+SEO KEYWORDS (for reference)
+============================================
+- EV charging card
+- Universal EV charging
+- NFC charging card
+- Electric vehicle charging
+- EV charging network
+- Charging station access
+- WHITE EV
+- Universal charging network
+- EV charging app
+- Free EV card
+
+
+============================================
+COLOR PALETTE (for designers)
+============================================
+Primary:
+- Cyber Yellow: #EAB308
+- Neon Lime: #CCFF00
+
+Dark Mode:
+- Background: #080808 (Void Black)
+- Text: #FFFFFF (White)
+- Muted Text: #A3A3A3
+
+Light Mode:
+- Background: #F5F5F5
+- Surface: #FFFFFF
+- Text: #1A1A1A
+- Muted Text: #6B7280
+
+
+============================================
+END OF CONTENT
+============================================
