@@ -93,7 +93,7 @@ function CardMockup() {
   )
 }
 
-export default function CtaSection() {
+export default function CtaSection({ onPageChange }) {
   return (
     <section id="cta" style={{
       background: 'linear-gradient(135deg, #0C1C6B 0%, #1348C0 50%, #0A7EC7 100%)',
@@ -147,25 +147,37 @@ export default function CtaSection() {
 
         {/* Left — copy */}
         <motion.div
-          initial={{ opacity: 0, x: -24 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, x: -60, scale: 0.95 }}
+          whileInView={{ opacity: 1, x: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem' }}
         >
           {/* Label */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+          >
             <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#7DD3FC', boxShadow: '0 0 10px rgba(125,211,252,0.6)' }} />
             <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase' }}>
               Join the network
             </span>
-          </div>
+          </motion.div>
 
           {/* Headline */}
-          <h2 style={{
-            fontSize: 'clamp(2.5rem, 5vw, 4.25rem)', fontWeight: 900,
-            lineHeight: 1.04, letterSpacing: '-0.04em', color: 'white',
-          }}>
+          <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              fontSize: 'clamp(2.5rem, 5vw, 4.25rem)', fontWeight: 900,
+              lineHeight: 1.04, letterSpacing: '-0.04em', color: 'white',
+            }}
+          >
             One card.<br />Every network.<br />
             <span style={{
               background: 'linear-gradient(120deg, #7DD3FC, #38BDF8, #06B6D4)',
@@ -173,21 +185,38 @@ export default function CtaSection() {
             }}>
               Zero friction.
             </span>
-          </h2>
+          </motion.h2>
 
           {/* Body */}
-          <p style={{
-            color: 'rgba(255,255,255,0.65)', fontSize: 'clamp(0.95rem, 1.4vw, 1.1rem)',
-            lineHeight: 1.75, maxWidth: '440px',
-          }}>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, delay: 0.5 }}
+            style={{
+              color: 'rgba(255,255,255,0.65)', fontSize: 'clamp(0.95rem, 1.4vw, 1.1rem)',
+              lineHeight: 1.75, maxWidth: '440px',
+            }}
+          >
             Get your WHITE EV card through a participating partner, link your wallet, and tap to charge across every integrated network — with automatic payment settlement every time.
-          </p>
+          </motion.p>
 
           {/* Buttons */}
-          <div style={{ display: 'flex', gap: '0.875rem', flexWrap: 'wrap' }}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, delay: 0.7 }}
+            style={{ display: 'flex', gap: '0.875rem', flexWrap: 'wrap' }}
+          >
             <motion.a
               href="#"
-              whileHover={{ y: -2 }}
+              onClick={(e) => { e.preventDefault(); onPageChange?.('investors') }}
+              whileHover={{ y: -2, scale: 1.02 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: 0.8 }}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: '8px',
                 padding: '0.9rem 1.75rem', borderRadius: '12px',
@@ -207,7 +236,11 @@ export default function CtaSection() {
             </motion.a>
             <motion.a
               href="#"
-              whileHover={{ y: -2 }}
+              whileHover={{ y: -2, scale: 1.02 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: 0.9 }}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: '8px',
                 padding: '0.9rem 1.5rem', borderRadius: '12px',
@@ -227,28 +260,46 @@ export default function CtaSection() {
               </svg>
               Learn More
             </motion.a>
-          </div>
+          </motion.div>
 
           {/* Trust strip */}
-          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', paddingTop: '0.25rem' }}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 1 }}
+            style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', paddingTop: '0.25rem' }}
+          >
             {[
               { v: '10,000+', l: 'Stations' },
               { v: '256-bit', l: 'Encryption' },
               { v: '99.9%', l: 'Uptime SLA' },
-            ].map(item => (
-              <div key={item.l}>
+            ].map((item, i) => (
+              <motion.div
+                key={item.l}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5, delay: 1.1 + i * 0.1 }}
+              >
                 <div style={{ color: 'white', fontWeight: 700, fontSize: '0.88rem', letterSpacing: '-0.01em' }}>{item.v}</div>
                 <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.68rem', marginTop: '2px' }}>{item.l}</div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Right — card + pills */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
+        <motion.div
+          initial={{ opacity: 0, x: 60, scale: 0.9 }}
+          whileInView={{ opacity: 1, x: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}
+        >
           <CardMockup />
 
-        </div>
+        </motion.div>
 
       </div>
     </section>

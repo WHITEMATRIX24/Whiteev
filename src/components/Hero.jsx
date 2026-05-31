@@ -126,33 +126,51 @@ export default function Hero() {
       position: 'relative', overflow: 'hidden',
     }}>
       {/* Grain texture */}
-      <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', opacity: 0.14 }} aria-hidden>
+      <motion.svg
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.14 }}
+        transition={{ duration: 1.2, delay: 0.3 }}
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} aria-hidden>
         <filter id="hero-grain">
           <feTurbulence type="fractalNoise" baseFrequency="0.62" numOctaves="3" stitchTiles="stitch"/>
           <feColorMatrix type="saturate" values="0"/>
         </filter>
         <rect width="100%" height="100%" filter="url(#hero-grain)"/>
-      </svg>
+      </motion.svg>
 
       {/* Dot grid */}
-      <div style={{
-        position: 'absolute', inset: 0, pointerEvents: 'none',
-        backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)',
-        backgroundSize: '36px 36px',
-        opacity: 0.5,
-      }} />
+      <motion.div
+        initial={{ opacity: 0, scale: 1.1 }}
+        animate={{ opacity: 0.5, scale: 1 }}
+        transition={{ duration: 1.5, delay: 0.2 }}
+        style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)',
+          backgroundSize: '36px 36px',
+        }}
+      />
 
       {/* Glow orbs */}
-      <div style={{
-        position: 'absolute', top: '-80px', right: '-40px', width: '600px', height: '500px',
-        background: 'radial-gradient(ellipse, rgba(99,179,237,0.18) 0%, transparent 65%)',
-        pointerEvents: 'none',
-      }} />
-      <div style={{
-        position: 'absolute', bottom: '-60px', left: '-60px', width: '500px', height: '420px',
-        background: 'radial-gradient(ellipse, rgba(6,182,212,0.14) 0%, transparent 65%)',
-        pointerEvents: 'none',
-      }} />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8, x: 100 }}
+        animate={{ opacity: 1, scale: 1, x: 0 }}
+        transition={{ duration: 1.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          position: 'absolute', top: '-80px', right: '-40px', width: '600px', height: '500px',
+          background: 'radial-gradient(ellipse, rgba(99,179,237,0.18) 0%, transparent 65%)',
+          pointerEvents: 'none',
+        }}
+      />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8, x: -100 }}
+        animate={{ opacity: 1, scale: 1, x: 0 }}
+        transition={{ duration: 1.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          position: 'absolute', bottom: '-60px', left: '-60px', width: '500px', height: '420px',
+          background: 'radial-gradient(ellipse, rgba(6,182,212,0.14) 0%, transparent 65%)',
+          pointerEvents: 'none',
+        }}
+      />
 
       <div style={{
         maxWidth: '1200px', width: '100%', margin: '0 auto',
@@ -187,7 +205,7 @@ export default function Hero() {
             fontSize: 'clamp(1rem, 1.5vw, 1.125rem)', color: 'rgba(255,255,255,0.62)',
             lineHeight: 1.72, maxWidth: '460px',
           }}>
-            Receive a WHITE EV card through a participating partner, link your wallet, and tap to charge across every integrated network — with seamless authentication and automatic payment settlement.
+            Receive a WHITE EV card through a participating partner, link your wallet, and tap to charge across every integrated network, with seamless authentication and automatic payment settlement.
           </motion.p>
         </motion.div>
 

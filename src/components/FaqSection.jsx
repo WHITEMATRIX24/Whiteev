@@ -99,51 +99,86 @@ export default function FaqSection() {
         alignItems: 'start',
       }}>
         <motion.div
-          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, y: 60, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="faq-sticky-wrapper"
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.25rem' }}>
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.25rem' }}
+          >
             <div style={{ width: 28, height: 1, background: 'linear-gradient(to right, #3B82F6, transparent)' }} />
             <span style={{ color: '#3B82F6', fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase' }}>FAQ</span>
-          </div>
-          <h2 style={{
-            fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 800,
-            lineHeight: 1.1, letterSpacing: '-0.03em', color: '#0F172A', marginBottom: '1.25rem',
-          }}>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 800,
+              lineHeight: 1.1, letterSpacing: '-0.03em', color: '#0F172A', marginBottom: '1.25rem',
+            }}
+          >
             Common questions
-          </h2>
-          <p style={{ color: 'rgba(15,23,42,0.52)', fontSize: '1rem', lineHeight: 1.7, marginBottom: '2rem' }}>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            style={{ color: 'rgba(15,23,42,0.52)', fontSize: '1rem', lineHeight: 1.7, marginBottom: '2rem' }}
+          >
             Everything you need to know about the WHITE EV network, partner cards, and how charging works.
-          </p>
-          <a href="mailto:support@whiteev.com" style={{
-            display: 'inline-flex', alignItems: 'center', gap: '8px',
-            padding: '0.75rem 1.5rem', borderRadius: '10px',
-            border: '1px solid rgba(59,130,246,0.3)',
-            color: '#3B82F6', textDecoration: 'none', fontWeight: 600, fontSize: '0.875rem',
-            background: 'rgba(59,130,246,0.04)',
-          }}
+          </motion.p>
+          <motion.a
+            href="mailto:support@whiteev.com"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '8px',
+              padding: '0.75rem 1.5rem', borderRadius: '10px',
+              border: '1px solid rgba(59,130,246,0.3)',
+              color: '#3B82F6', textDecoration: 'none', fontWeight: 600, fontSize: '0.875rem',
+              background: 'rgba(59,130,246,0.04)',
+            }}
             onMouseEnter={e => { e.currentTarget.style.background = 'rgba(59,130,246,0.08)'; e.currentTarget.style.borderColor = 'rgba(59,130,246,0.5)' }}
             onMouseLeave={e => { e.currentTarget.style.background = 'rgba(59,130,246,0.04)'; e.currentTarget.style.borderColor = 'rgba(59,130,246,0.3)' }}
           >
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" strokeWidth="1.8"/><path d="M22 6l-10 7L2 6" stroke="currentColor" strokeWidth="1.8"/></svg>
             Contact Support
-          </a>
+          </motion.a>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, x: 60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
           <div style={{ borderTop: '1px solid rgba(15,23,42,0.08)' }}>
             {faqs.map((item, i) => (
-              <FAQItem
+              <motion.div
                 key={i}
-                q={item.q}
-                a={item.a}
-                isOpen={open === i}
-                onToggle={() => setOpen(open === i ? null : i)}
-              />
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: 0.4 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <FAQItem
+                  q={item.q}
+                  a={item.a}
+                  isOpen={open === i}
+                  onToggle={() => setOpen(open === i ? null : i)}
+                />
+              </motion.div>
             ))}
           </div>
         </motion.div>

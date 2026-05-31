@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion'
+
 const steps = [
   {
     num: '01',
@@ -8,7 +10,7 @@ const steps = [
         <circle cx="12" cy="15" r="1.5" fill="currentColor"/>
       </svg>
     ),
-    title: 'Get a WHITE-Powered Card',
+    title: 'Get a WHITE Powered Card',
     desc: 'Receive a WHITE EV compatible NFC card directly through participating EV platforms, OEMs, or charging partners.',
     accent: '#3B82F6',
   },
@@ -76,27 +78,62 @@ export default function HowItWorks() {
       `}</style>
 
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ marginBottom: 'clamp(3rem, 6vh, 5rem)', maxWidth: '560px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.25rem' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          style={{ marginBottom: 'clamp(3rem, 6vh, 5rem)', maxWidth: '560px' }}
+        >
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.25rem' }}
+          >
             <div style={{ width: 28, height: 1, background: 'linear-gradient(to right, #3B82F6, transparent)' }} />
             <span style={{ color: '#3B82F6', fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase' }}>
               The Process
             </span>
-          </div>
-          <h2 style={{
-            fontSize: 'clamp(2rem, 4vw, 3.25rem)', fontWeight: 800,
-            lineHeight: 1.1, letterSpacing: '-0.03em', color: '#0F172A', marginBottom: '1rem',
-          }}>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              fontSize: 'clamp(2rem, 4vw, 3.25rem)', fontWeight: 800,
+              lineHeight: 1.1, letterSpacing: '-0.03em', color: '#0F172A', marginBottom: '1rem',
+            }}
+          >
             From card to charge<br />in three steps
-          </h2>
-          <p style={{ color: 'rgba(15,23,42,0.55)', fontSize: '1.05rem', lineHeight: 1.7 }}>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            style={{ color: 'rgba(15,23,42,0.55)', fontSize: '1.05rem', lineHeight: 1.7 }}
+          >
             Get your WHITE EV card through a partner, link your wallet, and tap to charge across every integrated network.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         <div className="steps-open">
-          {steps.map((step) => (
-            <div key={step.num} className="step-open-item">
+          {steps.map((step, index) => (
+            <motion.div
+              key={step.num}
+              className="step-open-item"
+              initial={{ opacity: 0, y: 60, rotateX: 15 }}
+              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{
+                duration: 0.9,
+                delay: 0.6 + index * 0.2,
+                ease: [0.16, 1, 0.3, 1]
+              }}
+            >
               <div style={{
                 fontSize: 'clamp(3.5rem, 6vw, 5rem)', fontWeight: 900,
                 letterSpacing: '-0.06em', lineHeight: 1,
@@ -134,7 +171,7 @@ export default function HowItWorks() {
               <p style={{ color: 'rgba(15,23,42,0.55)', fontSize: '0.9rem', lineHeight: 1.75 }}>
                 {step.desc}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

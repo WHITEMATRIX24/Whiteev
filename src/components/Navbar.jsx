@@ -4,12 +4,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 const links = [
   { label: 'How It Works', href: '#how-it-works' },
   { label: 'Features',     href: '#features' },
-  { label: 'Network',      href: '#stats' },
+  { label: 'Network',      href: '#network' },
   { label: 'FAQ',          href: '#faq' },
-  { label: 'Investors',    href: '#investors', special: true },
 ]
 
-export default function Navbar({ onPageChange }) {
+export default function Navbar({ onPageChange, currentPage }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -34,7 +33,7 @@ export default function Navbar({ onPageChange }) {
             pointerEvents: 'auto',
             display: 'flex', alignItems: 'center',
             gap: '0.15rem',
-            padding: '0.4rem 0.4rem 0.4rem 1.4rem',
+            padding: '0.3rem 0.4rem 0.3rem 0.8rem',
             background: scrolled
               ? 'rgba(255,255,255,0.92)'
               : 'rgba(248,250,255,0.75)',
@@ -50,21 +49,8 @@ export default function Navbar({ onPageChange }) {
           }}
         >
           {/* Logo */}
-          <a href="#" onClick={(e) => { e.preventDefault(); onPageChange?.('home'); }} style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', marginRight: '1.25rem', cursor: 'pointer' }}>
-            <div style={{
-              width: 28, height: 28, borderRadius: '7px',
-              background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              flexShrink: 0,
-              boxShadow: '0 0 14px rgba(59,130,246,0.35)',
-            }}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="white" />
-              </svg>
-            </div>
-            <span style={{ color: '#0F172A', fontWeight: 700, fontSize: '0.92rem', letterSpacing: '-0.025em' }}>
-              WHITE<span style={{ color: '#3B82F6' }}>EV</span>
-            </span>
+          <a href="#" onClick={(e) => { e.preventDefault(); onPageChange?.('home'); }} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', marginRight: '1.25rem', cursor: 'pointer' }}>
+            <img src="/EvLogo.png" alt="White EV" style={{ height: '48px', width: 'auto', borderRadius: '8px', display: 'block' }} />
           </a>
 
           {/* Desktop links */}
@@ -74,9 +60,23 @@ export default function Navbar({ onPageChange }) {
                 key={l.label}
                 href={l.href}
                 onClick={(e) => {
-                  if (l.special) {
-                    e.preventDefault()
-                    onPageChange?.('investors')
+                  e.preventDefault()
+                  if (currentPage === 'investors') {
+                    // Switch to home page first
+                    onPageChange?.('home')
+                    // Wait for page to render, then scroll
+                    setTimeout(() => {
+                      const element = document.querySelector(l.href)
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                      }
+                    }, 100)
+                  } else {
+                    // Already on home page, just scroll
+                    const element = document.querySelector(l.href)
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    }
                   }
                 }}
                 style={{
@@ -106,8 +106,9 @@ export default function Navbar({ onPageChange }) {
 
           {/* CTA button */}
           <a
-            href="#cta"
+            href="#"
             className="hidden md:inline-flex"
+            onClick={(e) => { e.preventDefault(); onPageChange?.('investors') }}
             style={{
               marginLeft: '0.6rem',
               display: 'inline-flex', alignItems: 'center', gap: '6px',
@@ -133,7 +134,7 @@ export default function Navbar({ onPageChange }) {
               e.currentTarget.style.boxShadow = '0 0 20px rgba(59,130,246,0.35), inset 0 1px 0 rgba(255,255,255,0.15)'
             }}
           >
-            Partner With Us
+            Investment Opportunity
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
               <path d="M2 6h8M7 3l3 3-3 3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -141,7 +142,7 @@ export default function Navbar({ onPageChange }) {
 
           {/* Hamburger */}
           <button
-            className="md:hidden"
+            className="flex md:hidden"
             onClick={() => setMenuOpen(v => !v)}
             style={{
               marginLeft: '0.5rem',
@@ -149,7 +150,7 @@ export default function Navbar({ onPageChange }) {
               border: '1px solid rgba(15,23,42,0.1)',
               borderRadius: '100px',
               padding: '7px 10px',
-              display: 'flex', flexDirection: 'column', gap: '4px',
+              flexDirection: 'column', gap: '4px',
               cursor: 'pointer',
             }}
           >
@@ -200,11 +201,25 @@ export default function Navbar({ onPageChange }) {
                 key={l.label}
                 href={l.href}
                 onClick={(e) => {
-                  if (l.special) {
-                    e.preventDefault()
-                    onPageChange?.('investors')
-                  }
+                  e.preventDefault()
                   setMenuOpen(false)
+                  if (currentPage === 'investors') {
+                    // Switch to home page first
+                    onPageChange?.('home')
+                    // Wait for page to render, then scroll
+                    setTimeout(() => {
+                      const element = document.querySelector(l.href)
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                      }
+                    }, 100)
+                  } else {
+                    // Already on home page, just scroll
+                    const element = document.querySelector(l.href)
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    }
+                  }
                 }}
                 style={{
                   color: 'rgba(15,23,42,0.65)',
@@ -230,8 +245,8 @@ export default function Navbar({ onPageChange }) {
             ))}
             <div style={{ height: '1px', background: 'rgba(15,23,42,0.07)', margin: '0.4rem 0' }} />
             <a
-              href="#cta"
-              onClick={() => setMenuOpen(false)}
+              href="#"
+              onClick={(e) => { e.preventDefault(); onPageChange?.('investors'); setMenuOpen(false) }}
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
                 background: 'linear-gradient(135deg, #3B82F6, #06B6D4)',
@@ -240,7 +255,7 @@ export default function Navbar({ onPageChange }) {
                 boxShadow: '0 0 20px rgba(59,130,246,0.3)',
               }}
             >
-              Partner With Us
+              Investment Opportunity
               <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
                 <path d="M2 6h8M7 3l3 3-3 3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>

@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { ReactLenis } from 'lenis/react'
+import { AnimatePresence } from 'framer-motion'
 import PageLoader from './components/PageLoader'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import NetworkBar from './components/NetworkBar'
 import HowItWorks from './components/HowItWorks'
 import ProductFeatures from './components/ProductFeatures'
-import SessionDashboard from './components/SessionDashboard'
 import FaqSection from './components/FaqSection'
 import CtaSection from './components/CtaSection'
 import Footer from './components/Footer'
@@ -23,29 +23,29 @@ export default function App() {
 
   return (
     <>
-      <PageLoader onLoadComplete={() => setLoaded(true)} />
-      {loaded && (
-        <ReactLenis root options={{ lerp: 0.08, duration: 1.1 }}>
-          <Navbar onPageChange={setCurrentPage} />
-          {currentPage === 'home' && <FlyingCard />}
-          <main>
-            {currentPage === 'home' ? (
-              <>
-                <Hero />
-                <NetworkBar />
-                <HowItWorks />
-                <ProductFeatures />
-                <SessionDashboard />
-                <FaqSection />
-                <CtaSection />
-              </>
-            ) : (
-              <Investors />
-            )}
-          </main>
-          <Footer />
-        </ReactLenis>
-      )}
+      <AnimatePresence mode="wait">
+        {!loaded && <PageLoader key="loader" onLoadComplete={() => setLoaded(true)} />}
+      </AnimatePresence>
+      <ReactLenis root options={{ lerp: 0.08, duration: 1.1 }}>
+        {loaded && <Navbar onPageChange={setCurrentPage} currentPage={currentPage} />}
+        {loaded && currentPage === 'home' && <FlyingCard />}
+        <main>
+          {currentPage === 'home' ? (
+            <>
+              <Hero />
+              <HowItWorks />
+              <ProductFeatures />
+
+              <NetworkBar />
+              <FaqSection />
+              <CtaSection onPageChange={setCurrentPage} />
+            </>
+          ) : (
+            <Investors />
+          )}
+        </main>
+        {loaded && <Footer />}
+      </ReactLenis>
     </>
   )
 }
