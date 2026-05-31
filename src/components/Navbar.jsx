@@ -6,9 +6,10 @@ const links = [
   { label: 'Features',     href: '#features' },
   { label: 'Network',      href: '#stats' },
   { label: 'FAQ',          href: '#faq' },
+  { label: 'Investors',    href: '#investors', special: true },
 ]
 
-export default function Navbar() {
+export default function Navbar({ onPageChange }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -49,7 +50,7 @@ export default function Navbar() {
           }}
         >
           {/* Logo */}
-          <a href="#" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', marginRight: '1.25rem' }}>
+          <a href="#" onClick={(e) => { e.preventDefault(); onPageChange?.('home'); }} style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', marginRight: '1.25rem', cursor: 'pointer' }}>
             <div style={{
               width: 28, height: 28, borderRadius: '7px',
               background: 'linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)',
@@ -72,6 +73,12 @@ export default function Navbar() {
               <a
                 key={l.label}
                 href={l.href}
+                onClick={(e) => {
+                  if (l.special) {
+                    e.preventDefault()
+                    onPageChange?.('investors')
+                  }
+                }}
                 style={{
                   color: 'rgba(15,23,42,0.52)',
                   textDecoration: 'none',
@@ -81,6 +88,7 @@ export default function Navbar() {
                   padding: '0.38rem 0.8rem',
                   borderRadius: '100px',
                   transition: 'color 0.2s, background 0.2s',
+                  cursor: 'pointer',
                 }}
                 onMouseEnter={e => {
                   e.currentTarget.style.color = '#0F172A'
@@ -191,7 +199,13 @@ export default function Navbar() {
               <a
                 key={l.label}
                 href={l.href}
-                onClick={() => setMenuOpen(false)}
+                onClick={(e) => {
+                  if (l.special) {
+                    e.preventDefault()
+                    onPageChange?.('investors')
+                  }
+                  setMenuOpen(false)
+                }}
                 style={{
                   color: 'rgba(15,23,42,0.65)',
                   textDecoration: 'none',
@@ -200,6 +214,7 @@ export default function Navbar() {
                   padding: '0.6rem 0.9rem',
                   borderRadius: '12px',
                   transition: 'color 0.2s, background 0.2s',
+                  cursor: 'pointer',
                 }}
                 onMouseEnter={e => {
                   e.currentTarget.style.color = '#0F172A'

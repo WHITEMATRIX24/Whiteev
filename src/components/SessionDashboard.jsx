@@ -13,13 +13,13 @@ export default function GlobalNetwork() {
   return (
     <section
       style={{
-        height: '100vh',
+        minHeight: '100vh',
         background: 'linear-gradient(180deg, #0A1628 0%, #0D1F3C 100%)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '2rem 1.5rem',
+        padding: 'clamp(3rem, 5vh, 4rem) clamp(1rem, 3vw, 1.5rem)',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -29,11 +29,11 @@ export default function GlobalNetwork() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        style={{ textAlign: 'center', marginBottom: '4rem', zIndex: 2 }}
+        style={{ textAlign: 'center', marginBottom: 'clamp(2.5rem, 6vw, 4rem)', zIndex: 2, padding: '0 1rem' }}
       >
         <h2
           style={{
-            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+            fontSize: 'clamp(1.75rem, 5vw, 3.5rem)',
             fontWeight: 900,
             color: 'white',
             margin: 0,
@@ -51,7 +51,7 @@ export default function GlobalNetwork() {
             Charging Network
           </span>
         </h2>
-        <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.6)', margin: 0 }}>
+        <p style={{ fontSize: 'clamp(0.9rem, 2.5vw, 1.1rem)', color: 'rgba(255,255,255,0.6)', margin: 0 }}>
           WHITE EV connects charging stations worldwide
         </p>
       </motion.div>
@@ -60,8 +60,8 @@ export default function GlobalNetwork() {
       <div
         style={{
           position: 'relative',
-          width: 'min(500px, 80vw)',
-          height: 'min(500px, 80vw)',
+          width: 'min(500px, 90vw)',
+          height: 'min(500px, 90vw)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -177,7 +177,7 @@ export default function GlobalNetwork() {
                     left: '50%',
                     transform: 'translateX(-50%)',
                     whiteSpace: 'nowrap',
-                    fontSize: '0.75rem',
+                    fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
                     color: '#60A5FA',
                     fontWeight: 600,
                     textAlign: 'center',
@@ -210,8 +210,8 @@ export default function GlobalNetwork() {
             }}
             transition={{ duration: 3, repeat: Infinity }}
             style={{
-              width: '140px',
-              height: '140px',
+              width: 'clamp(100px, 25vw, 140px)',
+              height: 'clamp(100px, 25vw, 140px)',
               borderRadius: '50%',
               background: 'linear-gradient(135deg, #1E3A8A, #3B82F6)',
               display: 'flex',
@@ -222,7 +222,7 @@ export default function GlobalNetwork() {
           >
             <div
               style={{
-                fontSize: '1.8rem',
+                fontSize: 'clamp(1.2rem, 4.5vw, 1.8rem)',
                 fontWeight: 900,
                 color: 'white',
                 lineHeight: 1,
@@ -234,7 +234,7 @@ export default function GlobalNetwork() {
             </div>
             <div
               style={{
-                fontSize: '0.65rem',
+                fontSize: 'clamp(0.5rem, 1.5vw, 0.65rem)',
                 color: 'rgba(255,255,255,0.8)',
                 letterSpacing: '0.15em',
                 textTransform: 'uppercase',
@@ -255,10 +255,11 @@ export default function GlobalNetwork() {
         transition={{ delay: 1.2 }}
         style={{
           textAlign: 'center',
-          marginTop: '3rem',
-          fontSize: '0.95rem',
+          marginTop: 'clamp(2rem, 5vw, 3rem)',
+          fontSize: 'clamp(0.85rem, 2.2vw, 0.95rem)',
           color: 'rgba(255,255,255,0.5)',
           zIndex: 2,
+          padding: '0 1rem',
         }}
       >
         One platform connecting all charging networks globally

@@ -33,7 +33,7 @@ export default function PageLoader({ onLoadComplete }) {
       onLoadComplete?.()
     }, 2500)
     return () => { clearTimeout(exitTimer); clearTimeout(doneTimer) }
-  }, [onLoadComplete])
+  }, [])
 
   return (
     <AnimatePresence>

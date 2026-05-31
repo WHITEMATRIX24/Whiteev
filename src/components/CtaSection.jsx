@@ -13,7 +13,7 @@ function CardMockup() {
         animate={{ y: [0, -10, 0] }}
         transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
         style={{
-          width: 'clamp(240px, 30vw, 340px)',
+          width: 'clamp(260px, 35vw, 340px)',
           aspectRatio: '1.586',
           borderRadius: '18px',
           background: 'linear-gradient(145deg, #0D1A38 0%, #162C55 45%, #0B1529 100%)',

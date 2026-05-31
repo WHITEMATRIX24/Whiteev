@@ -83,6 +83,14 @@ export default function FaqSection() {
       background: '#F0F5FF',
       padding: 'clamp(5rem, 10vh, 8rem) clamp(1.5rem, 5vw, 5rem)',
     }}>
+      <style>{`
+        @media (min-width: 768px) {
+          .faq-sticky-wrapper {
+            position: sticky;
+            top: 5rem;
+          }
+        }
+      `}</style>
       <div style={{
         maxWidth: '1200px', margin: '0 auto',
         display: 'grid',
@@ -93,7 +101,7 @@ export default function FaqSection() {
         <motion.div
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          style={{ position: 'sticky', top: '5rem' }}
+          className="faq-sticky-wrapper"
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.25rem' }}>
             <div style={{ width: 28, height: 1, background: 'linear-gradient(to right, #3B82F6, transparent)' }} />
