@@ -103,8 +103,8 @@ export default function HowItWorks() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              fontSize: 'clamp(2rem, 4vw, 3.25rem)', fontWeight: 800,
-              lineHeight: 1.1, letterSpacing: '-0.03em', color: '#0F172A', marginBottom: '1rem',
+              fontSize: 'clamp(2.5rem, 5.5vw, 4.5rem)', fontWeight: 900,
+              lineHeight: 0.95, letterSpacing: '-0.06em', color: '#0F172A', marginBottom: '1rem',
             }}
           >
             From card to charge<br />in three steps

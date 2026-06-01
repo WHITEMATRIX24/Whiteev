@@ -238,6 +238,87 @@ function LockOverlay() {
   )
 }
 
+function NetworkOverlay() {
+  return (
+    <div style={{
+      position: 'absolute', inset: 0,
+      borderRadius: '16px',
+      background: 'rgba(5, 12, 30, 0.85)',
+      backdropFilter: 'blur(12px)',
+      padding: '14px 16px',
+      display: 'flex', flexDirection: 'column', gap: '10px',
+      zIndex: 2,
+    }}>
+      {/* Header */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <span style={{ color: 'rgba(255,255,255,0.9)', fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+          Universal Network
+        </span>
+        <div style={{
+          background: 'rgba(59,130,246,0.2)',
+          border: '1px solid rgba(59,130,246,0.4)',
+          borderRadius: '4px',
+          padding: '2px 6px',
+        }}>
+          <span style={{ color: '#60A5FA', fontSize: '0.5rem', fontWeight: 700, letterSpacing: '0.08em' }}>ACTIVE</span>
+        </div>
+      </div>
+
+      {/* Main stat */}
+      <div style={{ marginTop: '4px' }}>
+        <div style={{ color: 'white', fontSize: '1.8rem', fontWeight: 900, lineHeight: 1, letterSpacing: '-0.02em' }}>
+          10,000<span style={{ color: '#60A5FA' }}>+</span>
+        </div>
+        <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.5rem', letterSpacing: '0.08em', marginTop: '3px', textTransform: 'uppercase' }}>
+          Charging Stations
+        </div>
+      </div>
+
+      {/* Networks */}
+      <div style={{ marginTop: '6px' }}>
+        <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.48rem', letterSpacing: '0.08em', marginBottom: '6px', textTransform: 'uppercase' }}>
+          Integrated Networks
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+          {['ChargePoint', 'EVgo', 'Blink', 'EA'].map((network) => (
+            <div key={network} style={{
+              background: 'rgba(255,255,255,0.08)',
+              border: '1px solid rgba(255,255,255,0.15)',
+              borderRadius: '6px',
+              padding: '3px 8px',
+            }}>
+              <span style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.55rem', fontWeight: 600, letterSpacing: '0.02em' }}>
+                {network}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Coverage badge */}
+      <div style={{
+        marginTop: 'auto',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '6px',
+        padding: '6px 10px',
+        background: 'linear-gradient(135deg, rgba(59,130,246,0.15), rgba(6,182,212,0.15))',
+        border: '1px solid rgba(59,130,246,0.3)',
+        borderRadius: '8px',
+      }}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+            stroke="#60A5FA" strokeWidth="2" fill="rgba(96,165,250,0.2)"/>
+          <circle cx="12" cy="9" r="2.5" fill="#60A5FA"/>
+        </svg>
+        <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.52rem', fontWeight: 600, letterSpacing: '0.04em' }}>
+          Nationwide Coverage
+        </span>
+      </div>
+    </div>
+  )
+}
+
 function TrackingOverlay() {
   const bars = [45, 72, 38, 91, 60, 85, 78]
   return (
@@ -335,12 +416,14 @@ export default function FlyingCard() {
   const elRef       = useRef(null)
   const lockRef     = useRef(null)
   const trackingRef = useRef(null)
+  const networkRef  = useRef(null)
 
   useEffect(() => {
     const el         = elRef.current
     const lockEl     = lockRef.current
     const trackingEl = trackingRef.current
-    if (!el || !lockEl || !trackingEl) return
+    const networkEl  = networkRef.current
+    if (!el || !lockEl || !trackingEl || !networkEl) return
 
     let rafId
 
@@ -350,7 +433,7 @@ export default function FlyingCard() {
     const LERP_REVEAL = 0.07
 
     let curTop = 0, curLeft = 0, curWidth = 0
-    let curOpacity = 0, curLockOpacity = 0, curTrackingOpacity = 0
+    let curOpacity = 0, curLockOpacity = 0, curTrackingOpacity = 0, curNetworkOpacity = 0
     let curNetworkSvgOpacity = 0, curNfcRingsOpacity = 0
     let curRotateY = 0
 
@@ -359,6 +442,7 @@ export default function FlyingCard() {
         el.style.opacity = '0'
         lockEl.style.opacity = '0'
         trackingEl.style.opacity = '0'
+        networkEl.style.opacity = '0'
         rafId = requestAnimationFrame(tick)
         return
       }
@@ -373,6 +457,7 @@ export default function FlyingCard() {
         el.style.opacity = '0'
         lockEl.style.opacity = '0'
         trackingEl.style.opacity = '0'
+        networkEl.style.opacity = '0'
         rafId = requestAnimationFrame(tick)
         return
       }
@@ -421,50 +506,59 @@ export default function FlyingCard() {
       const networkSvgEl = document.getElementById('network-svg-visual')
       const nfcRingsEl   = document.getElementById('nfc-rings-visual')
 
-      let top, left, width, opacity, lockOpacity, trackingOpacity, networkSvgOpacity = 0, nfcRingsOpacity = 0, targetRotateY = 0
+      let top, left, width, opacity, lockOpacity, trackingOpacity, networkOpacity, networkSvgOpacity = 0, nfcRingsOpacity = 0, targetRotateY = 0
 
       if (scrollY < p1Start) {
-        opacity = 0; lockOpacity = 0; trackingOpacity = 0
+        opacity = 0; lockOpacity = 0; trackingOpacity = 0; networkOpacity = 0
         top = heroRect.top; left = heroRect.left; width = heroRect.width
       } else if (scrollY <= p1End) {
         const p = Math.min(1, (scrollY - p1Start) / Math.max(1, p1End - p1Start))
         ;({ top, left, width } = fly(p, heroRect, nfcRect))
-        opacity = Math.min(1, p * 12); lockOpacity = 0; trackingOpacity = 0
+        opacity = Math.min(1, p * 12); lockOpacity = 0; trackingOpacity = 0; networkOpacity = 0
       } else if (scrollY < p2Start) {
         top = nfcRect.top; left = nfcRect.left; width = nfcRect.width
-        opacity = 1; lockOpacity = 0; trackingOpacity = 0
+        opacity = 1; lockOpacity = 0; trackingOpacity = 0; networkOpacity = 0
         nfcRingsOpacity = Math.min(1, (scrollY - p1End) / 120)
       } else if (scrollY <= p2End) {
         const p = Math.min(1, (scrollY - p2Start) / Math.max(1, p2End - p2Start))
         ;({ top, left, width } = fly(p, nfcRect, secureRect))
-        opacity = 1; lockOpacity = 0; trackingOpacity = 0
+        opacity = 1; lockOpacity = 0; trackingOpacity = 0; networkOpacity = 0
         nfcRingsOpacity = Math.max(0, 1 - p * 8)
       } else if (scrollY < p3Start) {
         top = secureRect.top; left = secureRect.left; width = secureRect.width
         opacity = 1
         lockOpacity = Math.min(1, (scrollY - p2End) / 100)
-        trackingOpacity = 0
+        trackingOpacity = 0; networkOpacity = 0
       } else if (scrollY <= p3End) {
         const p = Math.min(1, (scrollY - p3Start) / Math.max(1, p3End - p3Start))
         ;({ top, left, width } = fly(p, secureRect, trackingRect))
-        opacity = 1; lockOpacity = Math.max(0, 1 - p * 8); trackingOpacity = 0
+        opacity = 1; lockOpacity = Math.max(0, 1 - p * 8); trackingOpacity = 0; networkOpacity = 0
         targetRotateY = p * 360
       } else if (scrollY < p4Start) {
         top = trackingRect.top; left = trackingRect.left; width = trackingRect.width
         opacity = 1; lockOpacity = 0
         trackingOpacity = Math.min(1, (scrollY - p3End) / 100)
+        networkOpacity = 0
         targetRotateY = 360
       } else if (scrollY <= p4End) {
         const p = Math.min(1, (scrollY - p4Start) / Math.max(1, p4End - p4Start))
         ;({ top, left, width } = fly(p, trackingRect, networkRect))
-        opacity = 1; lockOpacity = 0; trackingOpacity = Math.max(0, 1 - p * 8)
+        opacity = 1; lockOpacity = 0; trackingOpacity = Math.max(0, 1 - p * 8); networkOpacity = 0
         targetRotateY = 360 + p * 360
-      } else {
+      } else if (scrollY < p4End + 120) {
         top = networkRect.top; left = networkRect.left; width = networkRect.width
         const parkProgress = Math.min(1, (scrollY - p4End) / 120)
-        opacity = 1 - parkProgress * 0.65
+        opacity = 1
         lockOpacity = 0; trackingOpacity = 0
+        networkOpacity = Math.min(1, parkProgress * 3)
         networkSvgOpacity = parkProgress
+        targetRotateY = 720
+      } else {
+        top = networkRect.top; left = networkRect.left; width = networkRect.width
+        opacity = 1
+        lockOpacity = 0; trackingOpacity = 0
+        networkOpacity = 1
+        networkSvgOpacity = 1
         targetRotateY = 720
       }
 
@@ -474,6 +568,7 @@ export default function FlyingCard() {
       curOpacity          = lerp(curOpacity,          opacity,          LERP_OPC)
       curLockOpacity      = lerp(curLockOpacity,      lockOpacity,      LERP_OPC)
       curTrackingOpacity  = lerp(curTrackingOpacity,  trackingOpacity,  LERP_OPC)
+      curNetworkOpacity   = lerp(curNetworkOpacity,   networkOpacity,   LERP_OPC)
       curNetworkSvgOpacity = lerp(curNetworkSvgOpacity, networkSvgOpacity, LERP_REVEAL)
       curNfcRingsOpacity   = lerp(curNfcRingsOpacity,   nfcRingsOpacity,   LERP_REVEAL)
       curRotateY = lerp(curRotateY, targetRotateY, LERP_POS)
@@ -483,6 +578,7 @@ export default function FlyingCard() {
       el.style.opacity   = String(curOpacity)
       lockEl.style.opacity     = String(curLockOpacity)
       trackingEl.style.opacity = String(curTrackingOpacity)
+      networkEl.style.opacity  = String(curNetworkOpacity)
       if (networkSvgEl) networkSvgEl.style.opacity = String(curNetworkSvgOpacity)
       if (nfcRingsEl)   nfcRingsEl.style.opacity   = String(curNfcRingsOpacity)
 
@@ -513,6 +609,9 @@ export default function FlyingCard() {
       </div>
       <div ref={trackingRef} style={{ opacity: 0 }}>
         <TrackingOverlay />
+      </div>
+      <div ref={networkRef} style={{ opacity: 0 }}>
+        <NetworkOverlay />
       </div>
     </div>
   )

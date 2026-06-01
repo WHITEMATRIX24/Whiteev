@@ -78,7 +78,7 @@ export default function Investors() {
               animate={{ opacity: 1, x: 0, rotateY: 0 }}
               transition={{ duration: 1.4, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
               style={{
-                fontSize: 'clamp(3rem, 11vw, 10rem)',
+                fontSize: 'clamp(2.5rem, 9vw, 8rem)',
                 fontWeight: 900,
                 lineHeight: 0.9,
                 letterSpacing: '-0.05em',
@@ -94,7 +94,7 @@ export default function Investors() {
               animate={{ opacity: 1, x: 0, rotateY: 0 }}
               transition={{ duration: 1.4, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
               style={{
-                fontSize: 'clamp(3rem, 11vw, 10rem)',
+                fontSize: 'clamp(2.5rem, 9vw, 8rem)',
                 fontWeight: 900,
                 lineHeight: 0.9,
                 letterSpacing: '-0.05em',
@@ -359,7 +359,7 @@ export default function Investors() {
                 { num: '03', title: 'NFC Card', sub: 'Tap & Pay', icon: '💳', color: '#06B6D4', highlight: true },
                 { num: '04', title: 'Station', sub: 'Reads', icon: '⚡', color: '#0891B2' },
                 { num: '05', title: 'WHITE EV', sub: 'Routes', icon: '🌐', color: '#3B82F6', highlight: true },
-                { num: '06', title: 'Settlement', sub: 'Processes', iconType: 'dollar', color: '#10B981' },
+                { num: '06', title: 'Settlement', sub: 'Processes', icon: '₹', color: '#10B981' },
                 { num: '07', title: 'Complete', sub: 'Confirmed', iconType: 'check', color: '#059669' },
               ].map((step, i) => (
                 <motion.div
@@ -445,17 +445,6 @@ export default function Investors() {
                             />
                           </g>
                         )}
-                        {step.iconType === 'dollar' && (
-                          <g>
-                            <path
-                              d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"
-                              stroke={step.color}
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </g>
-                        )}
                         {step.iconType === 'check' && (
                           <g>
                             <circle
@@ -481,6 +470,7 @@ export default function Investors() {
                           fontSize: step.highlight ? '2.5rem' : '2rem',
                           marginBottom: '0.25rem',
                           filter: step.highlight ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))' : 'none',
+                          color: step.highlight ? '#FFFFFF' : step.color,
                         }}>
                           {step.icon}
                         </div>

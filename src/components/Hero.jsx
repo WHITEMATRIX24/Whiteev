@@ -119,7 +119,7 @@ const fadeUp = { hidden: { opacity: 0, y: 22 }, visible: { opacity: 1, y: 0, tra
 export default function Hero() {
   return (
     <section id="hero" style={{
-      minHeight: '100vh',
+      height: '100vh',
       background: 'linear-gradient(155deg, #0A1628 0%, #0E2A5C 45%, #1248A8 100%)',
       display: 'flex', alignItems: 'center',
       padding: 'clamp(100px, 14vh, 140px) clamp(1.5rem, 5vw, 5rem) clamp(3rem, 8vh, 6rem)',
@@ -192,8 +192,9 @@ export default function Hero() {
           </motion.div>
 
           <motion.h1 variants={fadeUp} style={{
-            fontSize: 'clamp(2.6rem, 6vw, 5rem)', fontWeight: 800,
-            lineHeight: 1.04, letterSpacing: '-0.035em', color: 'white',
+            fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 900,
+            lineHeight: 0.95, letterSpacing: '-0.06em', color: 'white',
+            textTransform: 'uppercase',
           }}>
             One Card.<br />Every Network.<br />
             <span style={{ background: 'linear-gradient(120deg, #7DD3FC, #38BDF8, #06B6D4)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>

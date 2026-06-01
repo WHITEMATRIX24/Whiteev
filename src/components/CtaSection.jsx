@@ -174,8 +174,9 @@ export default function CtaSection({ onPageChange }) {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              fontSize: 'clamp(2.5rem, 5vw, 4.25rem)', fontWeight: 900,
-              lineHeight: 1.04, letterSpacing: '-0.04em', color: 'white',
+              fontSize: 'clamp(3rem, 6.5vw, 6rem)', fontWeight: 900,
+              lineHeight: 0.95, letterSpacing: '-0.06em', color: 'white',
+              textTransform: 'uppercase',
             }}
           >
             One card.<br />Every network.<br />
@@ -260,32 +261,6 @@ export default function CtaSection({ onPageChange }) {
               </svg>
               Learn More
             </motion.a>
-          </motion.div>
-
-          {/* Trust strip */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 1 }}
-            style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', paddingTop: '0.25rem' }}
-          >
-            {[
-              { v: '10,000+', l: 'Stations' },
-              { v: '256-bit', l: 'Encryption' },
-              { v: '99.9%', l: 'Uptime SLA' },
-            ].map((item, i) => (
-              <motion.div
-                key={item.l}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: 1.1 + i * 0.1 }}
-              >
-                <div style={{ color: 'white', fontWeight: 700, fontSize: '0.88rem', letterSpacing: '-0.01em' }}>{item.v}</div>
-                <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.68rem', marginTop: '2px' }}>{item.l}</div>
-              </motion.div>
-            ))}
           </motion.div>
         </motion.div>
 

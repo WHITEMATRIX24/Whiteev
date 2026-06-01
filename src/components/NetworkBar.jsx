@@ -39,11 +39,14 @@ export default function NetworkBar() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            fontSize: 'clamp(1.75rem, 5vw, 3.5rem)',
+            fontSize: 'clamp(2.5rem, 6.5vw, 5rem)',
             fontWeight: 900,
             color: 'white',
             margin: 0,
             marginBottom: '1rem',
+            lineHeight: 0.95,
+            letterSpacing: '-0.06em',
+            textTransform: 'uppercase',
           }}
         >
           Global{' '}
@@ -259,30 +262,16 @@ export default function NetworkBar() {
               flexDirection: 'column',
             }}
           >
-            <div
+            <img
+              src="/EvLogo.png"
+              alt="WHITE EV"
               style={{
-                fontSize: 'clamp(1.2rem, 4.5vw, 1.8rem)',
-                fontWeight: 900,
-                color: 'white',
-                lineHeight: 1,
+                width: 'clamp(60px, 15vw, 90px)',
+                height: 'auto',
+                borderRadius: '8px',
+                filter: 'brightness(0) invert(1)',
               }}
-            >
-              WHITE
-              <br />
-              EV
-            </div>
-            <div
-              style={{
-                fontSize: 'clamp(0.5rem, 1.5vw, 0.65rem)',
-                color: 'rgba(255,255,255,0.8)',
-                letterSpacing: '0.15em',
-                textTransform: 'uppercase',
-                marginTop: '0.4rem',
-                fontWeight: 600,
-              }}
-            >
-              Switch
-            </div>
+            />
           </motion.div>
         </motion.div>
       </motion.div>

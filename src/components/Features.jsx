@@ -122,79 +122,135 @@ function ProjectNav({ activeIndex }) {
 
 function LeftContent({ project }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', paddingTop: 16, paddingBottom: 16 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', paddingTop: 24, paddingBottom: 24 }}>
       <div>
+        {/* Icon + Label */}
         <div
           style={{
             fontFamily: "'Inter', sans-serif",
-            fontWeight: 600,
-            fontSize: '1.05rem',
-            color: 'rgba(255,255,255,0.35)',
-            marginBottom: '0.6rem',
+            fontWeight: 700,
+            fontSize: '0.65rem',
+            color: '#CCFF00',
+            marginBottom: '1.5rem',
             display: 'flex',
             alignItems: 'center',
-            gap: 8,
+            gap: 10,
+            letterSpacing: '0.15em',
+            textTransform: 'uppercase',
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ opacity: 0.4 }}>
-            <rect x="1" y="1" width="6" height="6" rx="1" fill="currentColor"/>
-            <rect x="9" y="1" width="6" height="6" rx="1" fill="currentColor"/>
-            <rect x="1" y="9" width="6" height="6" rx="1" fill="currentColor"/>
-            <rect x="9" y="9" width="6" height="6" rx="1" fill="currentColor"/>
-          </svg>
+          <div style={{
+            width: 32,
+            height: 32,
+            borderRadius: '8px',
+            background: 'linear-gradient(135deg, rgba(204,255,0,0.15), rgba(204,255,0,0.05))',
+            border: '1px solid rgba(204,255,0,0.3)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '1.1rem',
+          }}>
+            {project.icon}
+          </div>
           <AnimatePresence mode="wait">
             <motion.span
               key={project.id + '-logo'}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 10 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
               {project.logo}
             </motion.span>
           </AnimatePresence>
         </div>
 
-        <div style={{ marginBottom: '2rem', maxWidth: 400, minHeight: 60 }}>
+        {/* Main Title - Split into heading and description */}
+        <div style={{ marginBottom: '2.5rem', maxWidth: 450 }}>
           <AnimatePresence mode="wait">
-            <motion.h2
+            <motion.div
               key={project.id + '-title'}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontWeight: 700,
-                fontSize: 'clamp(1.3rem, 2.4vw, 1.75rem)',
-                lineHeight: 1.2,
-                color: '#ffffff',
-              }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
-              {project.title}
-            </motion.h2>
+              <h2 style={{
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 900,
+                fontSize: 'clamp(1.8rem, 3.2vw, 2.5rem)',
+                lineHeight: 0.95,
+                letterSpacing: '-0.04em',
+                color: '#ffffff',
+                marginBottom: '1rem',
+              }}>
+                {project.title.split('.')[0]}
+              </h2>
+              <p style={{
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 400,
+                fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
+                lineHeight: 1.6,
+                color: 'rgba(255,255,255,0.5)',
+              }}>
+                {project.title.split('.')[1]}
+              </p>
+            </motion.div>
           </AnimatePresence>
         </div>
 
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 24 }}>
-            <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: '1.1rem', color: 'rgba(255,255,255,0.4)', minWidth: 80, fontStyle: 'italic' }}>Platform</span>
+        {/* Details Section */}
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))',
+          border: '1px solid rgba(255,255,255,0.06)',
+          borderRadius: '12px',
+          padding: '1.5rem',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1.2rem'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+            <span style={{
+              fontFamily: "'Inter', sans-serif",
+              fontWeight: 700,
+              fontSize: '0.7rem',
+              color: 'rgba(204,255,0,0.8)',
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              minWidth: 90,
+            }}>Platform</span>
             <AnimatePresence mode="wait">
               <motion.span
                 key={project.id + '-platform'}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
-                style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'rgba(255,255,255,0.75)' }}
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: '0.85rem',
+                  color: 'rgba(255,255,255,0.9)',
+                  fontWeight: 600,
+                }}
               >
                 {project.platform}
               </motion.span>
             </AnimatePresence>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 24 }}>
-            <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: '1.1rem', color: 'rgba(255,255,255,0.4)', minWidth: 80, fontStyle: 'italic' }}>Features</span>
+          <div style={{ height: '1px', background: 'rgba(255,255,255,0.06)' }} />
+
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 20 }}>
+            <span style={{
+              fontFamily: "'Inter', sans-serif",
+              fontWeight: 700,
+              fontSize: '0.7rem',
+              color: 'rgba(204,255,0,0.8)',
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              minWidth: 90,
+              paddingTop: 2,
+            }}>Features</span>
             <AnimatePresence mode="wait">
               <motion.div
                 key={project.id + '-services'}

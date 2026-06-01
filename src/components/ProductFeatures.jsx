@@ -101,27 +101,41 @@ function VisualNetwork() {
   const edges = [[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[1,3],[2,6],[4,5]]
   return (
     <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', aspectRatio: '1', maxWidth: '400px', width: '100%' }}>
-      <div id="network-svg-visual" style={{ width: '85%', maxWidth: '340px', opacity: 0 }}>
+      <motion.div
+        id="network-svg-visual"
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        style={{ width: '85%', maxWidth: '340px' }}
+      >
         <svg viewBox="0 0 100 100" style={{ width: '100%' }}>
           {edges.map(([a, b], i) => (
             <motion.line key={i}
               x1={nodes[a].x} y1={nodes[a].y} x2={nodes[b].x} y2={nodes[b].y}
-              stroke="rgba(59,130,246,0.25)" strokeWidth="0.6"
-              animate={{ opacity: [0.25, 0.65, 0.25] }}
-              transition={{ duration: 3, delay: i * 0.3, repeat: Infinity }}
+              stroke="rgba(255,255,255,0.35)" strokeWidth="0.6"
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.3 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              animate={{ opacity: [0.35, 0.75, 0.35] }}
+              style={{ animationDelay: `${i * 0.3}s` }}
             />
           ))}
           {nodes.map((n, i) => (
             <motion.circle key={i}
               cx={n.x} cy={n.y}
               r={i === 0 ? 5 : 2.5}
-              fill={i === 0 ? '#3B82F6' : 'rgba(59,130,246,0.5)'}
-              animate={{ r: i === 0 ? [5, 6, 5] : [2.5, 3, 2.5], opacity: [0.7, 1, 0.7] }}
-              transition={{ duration: 2.5, delay: i * 0.2, repeat: Infinity }}
+              fill={i === 0 ? '#FFFFFF' : 'rgba(255,255,255,0.6)'}
+              initial={{ scale: 0, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 + i * 0.08, ease: [0.34, 1.56, 0.64, 1] }}
+              animate={{ r: i === 0 ? [5, 6, 5] : [2.5, 3, 2.5], opacity: [0.8, 1, 0.8] }}
             />
           ))}
         </svg>
-      </div>
+      </motion.div>
       <div
         id="features-network-left"
         style={{
@@ -166,9 +180,9 @@ export default function ProductFeatures() {
             const Visual = visuals[f.visual]
             return (
               <motion.div key={f.tag}
-                initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
                 viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.5 }}
                 style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))',
@@ -176,26 +190,186 @@ export default function ProductFeatures() {
                   alignItems: 'center',
                 }}
               >
-                <div style={{ order: f.flip ? 2 : 1, display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                  <span style={{ color: '#3B82F6', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase' }}>
+                <div style={{ order: f.flip ? 2 : 1, display: 'flex', flexDirection: 'column', gap: '1.25rem', position: 'relative' }}>
+                  {/* Animated background glow */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.2, delay: 0.2 }}
+                    animate={{
+                      opacity: [0.03, 0.08, 0.03],
+                      scale: [1, 1.05, 1],
+                    }}
+                    transition={{
+                      opacity: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+                      scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                    }}
+                    style={{
+                      position: 'absolute',
+                      top: '-20%',
+                      left: '-10%',
+                      width: '120%',
+                      height: '140%',
+                      background: 'radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%)',
+                      pointerEvents: 'none',
+                      zIndex: 0,
+                    }}
+                  />
+
+                  <motion.span
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                    animate={{
+                      y: [0, -3, 0],
+                    }}
+                    transition={{
+                      y: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+                    }}
+                    style={{
+                      color: '#3B82F6',
+                      fontSize: '0.72rem',
+                      fontWeight: 700,
+                      letterSpacing: '0.16em',
+                      textTransform: 'uppercase',
+                      position: 'relative',
+                      zIndex: 1,
+                      display: 'inline-block',
+                      width: 'fit-content',
+                    }}
+                  >
                     {f.tag}
-                  </span>
-                  <h3 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.4rem)', fontWeight: 800, letterSpacing: '-0.03em', color: '#0F172A', lineHeight: 1.15 }}>
-                    {f.title}
-                  </h3>
-                  <p style={{ color: 'rgba(15,23,42,0.58)', fontSize: '1rem', lineHeight: 1.72, maxWidth: '440px' }}>
+                  </motion.span>
+
+                  <motion.div style={{ position: 'relative', zIndex: 1 }}>
+                    <motion.h3
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      style={{
+                        fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
+                        fontWeight: 800,
+                        letterSpacing: '-0.03em',
+                        color: '#0F172A',
+                        lineHeight: 1.15,
+                        position: 'relative',
+                      }}
+                    >
+                      {f.title}
+                      {/* Animated underline */}
+                      <motion.div
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                        style={{
+                          position: 'absolute',
+                          bottom: -8,
+                          left: 0,
+                          height: 3,
+                          width: '60px',
+                          background: 'linear-gradient(90deg, #3B82F6, rgba(59,130,246,0.3))',
+                          transformOrigin: 'left',
+                          borderRadius: 2,
+                        }}
+                      />
+                    </motion.h3>
+                  </motion.div>
+
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    style={{
+                      color: 'rgba(15,23,42,0.58)',
+                      fontSize: '1rem',
+                      lineHeight: 1.72,
+                      maxWidth: '440px',
+                      position: 'relative',
+                      zIndex: 1,
+                    }}
+                  >
                     {f.desc}
-                  </p>
-                  <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.25rem' }}>
-                    {f.bullets.map(b => (
-                      <li key={b} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <div style={{ width: 18, height: 18, borderRadius: '50%', background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                          <svg width="9" height="9" viewBox="0 0 12 12" fill="none">
-                            <path d="M2 6l3 3 5-5" stroke="#3B82F6" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
-                        </div>
-                        <span style={{ color: 'rgba(15,23,42,0.65)', fontSize: '0.9rem' }}>{b}</span>
-                      </li>
+                  </motion.p>
+                  <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.25rem', position: 'relative', zIndex: 1 }}>
+                    {f.bullets.map((b, bulletIndex) => (
+                      <motion.li
+                        key={b}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        whileHover={{
+                          x: 8,
+                          transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] }
+                        }}
+                        transition={{
+                          duration: 0.5,
+                          delay: 0.4 + bulletIndex * 0.1,
+                          ease: [0.16, 1, 0.3, 1]
+                        }}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '10px',
+                          cursor: 'pointer',
+                          padding: '4px 0',
+                        }}
+                      >
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          whileInView={{ scale: 1 }}
+                          viewport={{ once: true }}
+                          whileHover={{
+                            scale: 1.2,
+                            backgroundColor: 'rgba(59,130,246,0.2)',
+                            borderColor: 'rgba(59,130,246,0.5)',
+                            transition: { duration: 0.3 }
+                          }}
+                          transition={{
+                            duration: 0.4,
+                            delay: 0.45 + bulletIndex * 0.1,
+                            ease: [0.34, 1.56, 0.64, 1]
+                          }}
+                          style={{
+                            width: 18,
+                            height: 18,
+                            borderRadius: '50%',
+                            background: 'rgba(59,130,246,0.1)',
+                            border: '1px solid rgba(59,130,246,0.25)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexShrink: 0,
+                          }}
+                        >
+                          <motion.svg
+                            width="9" height="9" viewBox="0 0 12 12" fill="none"
+                            initial={{ pathLength: 0 }}
+                            whileInView={{ pathLength: 1 }}
+                            viewport={{ once: true }}
+                            transition={{
+                              duration: 0.4,
+                              delay: 0.5 + bulletIndex * 0.1,
+                              ease: [0.16, 1, 0.3, 1]
+                            }}
+                          >
+                            <motion.path d="M2 6l3 3 5-5" stroke="#3B82F6" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                          </motion.svg>
+                        </motion.div>
+                        <motion.span
+                          whileHover={{
+                            color: 'rgba(15,23,42,0.85)',
+                            transition: { duration: 0.3 }
+                          }}
+                          style={{ color: 'rgba(15,23,42,0.65)', fontSize: '0.9rem' }}
+                        >
+                          {b}
+                        </motion.span>
+                      </motion.li>
                     ))}
                   </ul>
                 </div>
