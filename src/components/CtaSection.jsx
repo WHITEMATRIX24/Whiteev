@@ -95,9 +95,9 @@ function CardMockup() {
 
 export default function CtaSection({ onPageChange }) {
   return (
-    <section id="cta" style={{
+    <section id="cta" aria-label="WhiteEV Call to Action - Get Started" style={{
       background: 'linear-gradient(135deg, #0C1C6B 0%, #1348C0 50%, #0A7EC7 100%)',
-      padding: 'clamp(5rem, 12vh, 10rem) clamp(1.5rem, 5vw, 5rem)',
+      padding: 'clamp(3rem, 10vh, 10rem) clamp(1rem, 4vw, 5rem)',
       position: 'relative', overflow: 'hidden',
     }}>
 
@@ -178,6 +178,7 @@ export default function CtaSection({ onPageChange }) {
               lineHeight: 0.95, letterSpacing: '-0.06em', color: 'white',
               textTransform: 'uppercase',
             }}
+            itemProp="headline"
           >
             One card.<br />Every network.<br />
             <span style={{

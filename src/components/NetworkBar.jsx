@@ -20,7 +20,7 @@ export default function NetworkBar() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 'clamp(3rem, 5vh, 4rem) clamp(1rem, 3vw, 1.5rem)',
+        padding: 'clamp(2rem, 5vh, 4rem) clamp(1rem, 3vw, 1.5rem)',
         position: 'relative',
         overflow: 'hidden',
       }}

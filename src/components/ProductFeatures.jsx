@@ -152,10 +152,41 @@ const visuals = { nfc: VisualNFC, secure: VisualSecure, tracking: VisualTracking
 
 export default function ProductFeatures() {
   return (
-    <section id="features" style={{
+    <section id="features" aria-label="WhiteEV Product Features - Universal EV Charging Solutions" style={{
       background: '#FFFFFF',
-      padding: 'clamp(5rem, 10vh, 8rem) clamp(1.5rem, 5vw, 5rem)',
+      padding: 'clamp(3rem, 8vh, 8rem) clamp(1rem, 4vw, 5rem)',
     }}>
+      <style>{`
+        .features-container {
+          display: flex;
+          flex-direction: column;
+          gap: clamp(5rem, 10vh, 8rem);
+        }
+        .feature-item-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+          gap: clamp(2.5rem, 5vw, 5rem);
+          align-items: center;
+        }
+        .feature-visual-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 2rem;
+          overflow: hidden;
+        }
+        @media (max-width: 768px) {
+          .features-container {
+            gap: clamp(2rem, 4vh, 3rem);
+          }
+          .feature-item-grid {
+            gap: clamp(1.5rem, 3vw, 2rem);
+          }
+          .feature-visual-container {
+            padding: 0.5rem;
+          }
+        }
+      `}</style>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <motion.div
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
@@ -169,26 +200,21 @@ export default function ProductFeatures() {
           <h2 style={{
             fontSize: 'clamp(2rem, 4vw, 3.25rem)', fontWeight: 800,
             lineHeight: 1.1, letterSpacing: '-0.03em', color: '#0F172A',
-          }}>
+          }} itemProp="headline">
             Built for the network.<br />
             <span style={{ color: 'rgba(15,23,42,0.32)' }}>Designed for the driver.</span>
           </h2>
         </motion.div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(5rem, 10vh, 8rem)' }}>
+        <div className="features-container">
           {features.map((f, i) => {
             const Visual = visuals[f.visual]
             return (
               <motion.div key={f.tag}
+                className="feature-item-grid"
                 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.5 }}
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))',
-                  gap: 'clamp(2.5rem, 5vw, 5rem)',
-                  alignItems: 'center',
-                }}
               >
                 <div style={{ order: f.flip ? 2 : 1, display: 'flex', flexDirection: 'column', gap: '1.25rem', position: 'relative' }}>
                   {/* Animated background glow */}
@@ -374,10 +400,8 @@ export default function ProductFeatures() {
                   </ul>
                 </div>
 
-                <div style={{
+                <div className="feature-visual-container" style={{
                   order: f.flip ? 1 : 2,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  padding: '2rem', overflow: 'hidden',
                 }}>
                   <Visual />
                 </div>

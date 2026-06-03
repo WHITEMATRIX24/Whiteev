@@ -79,9 +79,9 @@ export default function FaqSection() {
   const [open, setOpen] = useState(0)
 
   return (
-    <section id="faq" style={{
+    <section id="faq" aria-label="WhiteEV Frequently Asked Questions" itemScope itemType="https://schema.org/FAQPage" style={{
       background: '#F0F5FF',
-      padding: 'clamp(5rem, 10vh, 8rem) clamp(1.5rem, 5vw, 5rem)',
+      padding: 'clamp(3rem, 8vh, 8rem) clamp(1rem, 4vw, 5rem)',
     }}>
       <style>{`
         @media (min-width: 768px) {
@@ -125,6 +125,7 @@ export default function FaqSection() {
               lineHeight: 0.95, letterSpacing: '-0.06em', color: '#0F172A', marginBottom: '1.25rem',
               textTransform: 'uppercase',
             }}
+            itemProp="headline"
           >
             Common questions
           </motion.h2>

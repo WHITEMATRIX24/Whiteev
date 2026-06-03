@@ -45,9 +45,9 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" style={{
+    <section id="how-it-works" aria-label="How WhiteEV Works - Three Simple Steps" style={{
       background: '#F0F5FF',
-      padding: 'clamp(5rem, 10vh, 8rem) clamp(1.5rem, 5vw, 5rem)',
+      padding: 'clamp(3rem, 8vh, 8rem) clamp(1rem, 4vw, 5rem)',
     }}>
       <style>{`
         .steps-open {
@@ -106,6 +106,7 @@ export default function HowItWorks() {
               fontSize: 'clamp(2.5rem, 5.5vw, 4.5rem)', fontWeight: 900,
               lineHeight: 0.95, letterSpacing: '-0.06em', color: '#0F172A', marginBottom: '1rem',
             }}
+            itemProp="headline"
           >
             From card to charge<br />in three steps
           </motion.h2>

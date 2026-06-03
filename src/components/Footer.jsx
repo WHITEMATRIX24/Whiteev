@@ -19,10 +19,10 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer style={{
+    <footer aria-label="WhiteEV Footer Navigation" style={{
       background: '#0B1120',
       borderTop: '1px solid rgba(255,255,255,0.06)',
-      padding: 'clamp(5rem, 10vh, 8rem) clamp(1.5rem, 5vw, 5rem) clamp(2.5rem, 5vh, 4rem)',
+      padding: 'clamp(3rem, 8vh, 8rem) clamp(1rem, 4vw, 5rem) clamp(2rem, 4vh, 4rem)',
     }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{
@@ -34,7 +34,7 @@ export default function Footer() {
           {/* Brand */}
           <div style={{ gridColumn: 'span 1', minWidth: '200px' }}>
             <div style={{ marginBottom: '1.25rem' }}>
-              <img src="/EvLogo.png" alt="White EV" style={{ height: '72px', width: 'auto', borderRadius: '10px', display: 'block' }} />
+              <img src="/EvLogo.png" alt="WhiteEV Logo - Universal EV Charging Card" title="WhiteEV - One Card. Every Charger." style={{ height: '72px', width: 'auto', borderRadius: '10px', display: 'block' }} />
             </div>
             <p style={{ color: 'rgba(255,255,255,0.38)', fontSize: '0.875rem', lineHeight: 1.7, maxWidth: '240px', marginBottom: '1.25rem' }}>
               The universal NFC charging card for every EV driver. One card. Every charger.
