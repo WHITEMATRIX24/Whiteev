@@ -1,0 +1,23 @@
+# robots.txt for WhiteEV.com
+
+# Allow all search engines to crawl the entire site
+User-agent: *
+Allow: /
+
+# Crawl-delay (optional - prevents overwhelming the server)
+# Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://whiteev.com/sitemap.xml
+
+# Block access to specific file types if needed (currently allowing all)
+# Disallow: /*.json$
+# Disallow: /*.xml$
+
+# Googlebot specific rules (optional)
+User-agent: Googlebot
+Allow: /
+
+# Bingbot specific rules (optional)
+User-agent: Bingbot
+Allow: /
