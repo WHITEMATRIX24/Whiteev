@@ -115,8 +115,8 @@ export default function Investors() {
             transition={{ duration: 1.2, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '4rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
+              gap: 'clamp(2rem, 4vw, 4rem)',
               maxWidth: '1000px',
             }}
           >
@@ -199,7 +199,7 @@ export default function Investors() {
           {/* Bento grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(12, 1fr)',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
             gap: '1.5rem',
             gridAutoRows: 'minmax(180px, auto)',
           }}>
@@ -210,8 +210,7 @@ export default function Investors() {
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
               style={{
-                gridColumn: 'span 12',
-                gridRow: 'span 2',
+                gridColumn: '1 / -1',
                 background: 'linear-gradient(135deg, #0A1628 0%, #1E293B 100%)',
                 borderRadius: '24px',
                 padding: 'clamp(2rem, 5vw, 4rem)',
@@ -272,6 +271,80 @@ export default function Investors() {
       {/* ═══════════════════════════════════════════════════════════ */}
       {/* HOW IT WORKS - Flow Chart */}
       {/* ═══════════════════════════════════════════════════════════ */}
+      <style>{`
+        .flowchart-container {
+          position: relative;
+          padding: 2rem 0;
+        }
+
+        .flow-nodes-wrapper {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          position: relative;
+          z-index: 1;
+          flex-wrap: wrap;
+          gap: clamp(1rem, 3vw, 2rem);
+          padding: 0 clamp(0.5rem, 2vw, 0);
+        }
+
+        .flow-svg-path {
+          display: block;
+        }
+
+        @media (max-width: 768px) {
+          .flow-nodes-wrapper {
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+            padding: 0 1rem;
+          }
+
+          .flow-svg-path {
+            display: none;
+          }
+
+          .flow-node-item {
+            width: 100%;
+            max-width: 200px;
+            position: relative;
+          }
+
+          /* Vertical connecting line on mobile */
+          .flow-node-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            bottom: -3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 3rem;
+            background: linear-gradient(180deg, rgba(59,130,246,0.5) 0%, rgba(6,182,212,0.3) 100%);
+          }
+
+          /* Arrow at the end of each connector */
+          .flow-node-item:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            bottom: -3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid rgba(6,182,212,0.5);
+            z-index: 1;
+          }
+        }
+
+        @media (min-width: 769px) {
+          .flow-node-item {
+            flex: 1 1 140px;
+            min-width: 140px;
+          }
+        }
+      `}</style>
       <section style={{
         minHeight: '100vh',
         background: '#FAFAFA',
@@ -306,9 +379,10 @@ export default function Investors() {
           </motion.div>
 
           {/* Flowchart SVG + Nodes */}
-          <div style={{ position: 'relative', padding: '2rem 0' }}>
+          <div className="flowchart-container">
             {/* SVG Path */}
             <svg
+              className="flow-svg-path"
               style={{
                 position: 'absolute',
                 top: 0,
@@ -344,15 +418,7 @@ export default function Investors() {
             </svg>
 
             {/* Flow Nodes */}
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
-              position: 'relative',
-              zIndex: 1,
-              flexWrap: 'wrap',
-              gap: '2rem',
-            }}>
+            <div className="flow-nodes-wrapper">
               {[
                 { num: '01', title: 'Driver', sub: 'Initiates', iconType: 'car', color: '#3B82F6' },
                 { num: '02', title: 'App/OEM', sub: 'Authenticates', iconType: 'phone', color: '#0284C7' },
@@ -364,6 +430,7 @@ export default function Investors() {
               ].map((step, i) => (
                 <motion.div
                   key={i}
+                  className="flow-node-item"
                   initial={{ opacity: 0, y: 80, scale: 0.7, rotate: -10 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
                   viewport={{ once: true, margin: '-50px' }}
@@ -373,8 +440,6 @@ export default function Investors() {
                     ease: [0.16, 1, 0.3, 1],
                   }}
                   style={{
-                    flex: '1 1 140px',
-                    minWidth: '140px',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -408,62 +473,73 @@ export default function Investors() {
                   >
                     {/* Icon - SVG or Emoji */}
                     {step.iconType ? (
-                      <svg
-                        width={step.highlight ? '52' : '44'}
-                        height={step.highlight ? '52' : '44'}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        {step.iconType === 'car' && (
-                          <path
-                            d="M5 13l1.5-4.5h11L19 13m-14 0v5a1 1 0 001 1h1a1 1 0 001-1v-1h8v1a1 1 0 001 1h1a1 1 0 001-1v-5M5 13h14M7 16h0m10 0h0"
-                            stroke={step.color}
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        )}
-                        {step.iconType === 'phone' && (
-                          <g>
-                            <rect
-                              x="6"
-                              y="3"
-                              width="12"
-                              height="18"
-                              rx="2"
+                      <>
+                        <svg
+                          width={step.highlight ? '40' : '32'}
+                          height={step.highlight ? '40' : '32'}
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          style={{ marginBottom: '0.25rem' }}
+                        >
+                          {step.iconType === 'car' && (
+                            <path
+                              d="M5 13l1.5-4.5h11L19 13m-14 0v5a1 1 0 001 1h1a1 1 0 001-1v-1h8v1a1 1 0 001 1h1a1 1 0 001-1v-5M5 13h14M7 16h0m10 0h0"
                               stroke={step.color}
                               strokeWidth="2"
                               strokeLinecap="round"
                               strokeLinejoin="round"
                             />
-                            <path
-                              d="M12 18h.01"
-                              stroke={step.color}
-                              strokeWidth="2.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </g>
-                        )}
-                        {step.iconType === 'check' && (
-                          <g>
-                            <circle
-                              cx="12"
-                              cy="12"
-                              r="10"
-                              stroke={step.color}
-                              strokeWidth="2"
-                            />
-                            <path
-                              d="M9 12l2 2 4-4"
-                              stroke={step.color}
-                              strokeWidth="2.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </g>
-                        )}
-                      </svg>
+                          )}
+                          {step.iconType === 'phone' && (
+                            <g>
+                              <rect
+                                x="6"
+                                y="3"
+                                width="12"
+                                height="18"
+                                rx="2"
+                                stroke={step.color}
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                              <path
+                                d="M12 18h.01"
+                                stroke={step.color}
+                                strokeWidth="2.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </g>
+                          )}
+                          {step.iconType === 'check' && (
+                            <g>
+                              <circle
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke={step.color}
+                                strokeWidth="2"
+                              />
+                              <path
+                                d="M9 12l2 2 4-4"
+                                stroke={step.color}
+                                strokeWidth="2.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </g>
+                          )}
+                        </svg>
+                        <div style={{
+                          fontSize: '0.65rem',
+                          fontWeight: 800,
+                          color: step.highlight ? '#FFFFFF' : step.color,
+                          letterSpacing: '0.05em',
+                        }}>
+                          {step.num}
+                        </div>
+                      </>
                     ) : (
                       <>
                         <div style={{
@@ -602,9 +678,9 @@ export default function Investors() {
             {/* Side by side content */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '4rem',
-              marginTop: '4rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))',
+              gap: 'clamp(2rem, 5vw, 4rem)',
+              marginTop: 'clamp(2rem, 5vw, 4rem)',
             }}>
               <motion.div
                 initial={{ opacity: 0, x: -80, rotate: -5 }}
@@ -613,7 +689,7 @@ export default function Investors() {
                 transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div style={{
-                  fontSize: 'clamp(3rem, 6vw, 5rem)',
+                  fontSize: 'clamp(2.5rem, 6vw, 5rem)',
                   fontWeight: 900,
                   color: 'rgba(255,255,255,0.1)',
                   lineHeight: 1,
@@ -622,7 +698,7 @@ export default function Investors() {
                   01
                 </div>
                 <h3 style={{
-                  fontSize: '1.4rem',
+                  fontSize: 'clamp(1.2rem, 3vw, 1.4rem)',
                   fontWeight: 700,
                   color: '#FFFFFF',
                   marginBottom: '1rem',
@@ -645,7 +721,7 @@ export default function Investors() {
                 transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div style={{
-                  fontSize: 'clamp(3rem, 6vw, 5rem)',
+                  fontSize: 'clamp(2.5rem, 6vw, 5rem)',
                   fontWeight: 900,
                   color: 'rgba(255,255,255,0.1)',
                   lineHeight: 1,
@@ -654,7 +730,7 @@ export default function Investors() {
                   02
                 </div>
                 <h3 style={{
-                  fontSize: '1.4rem',
+                  fontSize: 'clamp(1.2rem, 3vw, 1.4rem)',
                   fontWeight: 700,
                   color: '#FFFFFF',
                   marginBottom: '1rem',
@@ -677,7 +753,7 @@ export default function Investors() {
                 transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div style={{
-                  fontSize: 'clamp(3rem, 6vw, 5rem)',
+                  fontSize: 'clamp(2.5rem, 6vw, 5rem)',
                   fontWeight: 900,
                   color: 'rgba(255,255,255,0.1)',
                   lineHeight: 1,
@@ -686,7 +762,7 @@ export default function Investors() {
                   03
                 </div>
                 <h3 style={{
-                  fontSize: '1.4rem',
+                  fontSize: 'clamp(1.2rem, 3vw, 1.4rem)',
                   fontWeight: 700,
                   color: '#FFFFFF',
                   marginBottom: '1rem',
@@ -717,8 +793,8 @@ export default function Investors() {
         <div style={{ maxWidth: '1400px', margin: '0 auto', padding: 'clamp(6rem, 15vh, 12rem) clamp(2rem, 5vw, 4rem)' }}>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
-            gap: '6rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(350px, 100%), 1fr))',
+            gap: 'clamp(3rem, 6vw, 6rem)',
             alignItems: 'center',
           }}>
             {/* Left - Content */}
@@ -941,15 +1017,15 @@ export default function Investors() {
                   viewport={{ once: true, margin: '-50px' }}
                   transition={{ duration: 0.9, delay: i * 0.12 + 0.5, ease: [0.16, 1, 0.3, 1] }}
                   style={{
-                    padding: '2.5rem 0',
+                    padding: 'clamp(1.5rem, 3vw, 2.5rem) 0',
                     borderBottom: '1px solid rgba(255,255,255,0.1)',
                     display: 'grid',
                     gridTemplateColumns: 'auto 1fr',
-                    gap: '2rem',
+                    gap: 'clamp(1rem, 3vw, 2rem)',
                   }}
                 >
                   <div style={{
-                    fontSize: '3rem',
+                    fontSize: 'clamp(2rem, 5vw, 3rem)',
                     fontWeight: 900,
                     color: 'rgba(255,255,255,0.1)',
                     lineHeight: 1,
@@ -1068,10 +1144,10 @@ export default function Investors() {
               transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
               style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-              gap: '2rem',
-              marginTop: '4rem',
-              padding: '2rem 0',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(120px, 100%), 1fr))',
+              gap: 'clamp(1.5rem, 3vw, 2rem)',
+              marginTop: 'clamp(2rem, 5vw, 4rem)',
+              padding: 'clamp(1.5rem, 3vw, 2rem) 0',
               borderTop: '1px solid #E5E7EB',
             }}>
               {[
@@ -1186,23 +1262,25 @@ export default function Investors() {
               transition={{ duration: 1.1, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
               style={{
               display: 'flex',
-              gap: '1.5rem',
+              gap: 'clamp(1rem, 2vw, 1.5rem)',
               justifyContent: 'center',
               flexWrap: 'wrap',
+              padding: '0 1rem',
             }}>
               <motion.a
                 href="mailto:investors@whiteev.com"
                 whileHover={{ y: -2 }}
                 style={{
-                  padding: '1.2rem 3rem',
+                  padding: 'clamp(1rem, 2vw, 1.2rem) clamp(1.5rem, 4vw, 3rem)',
                   background: 'linear-gradient(135deg, #3B82F6, #06B6D4)',
                   color: '#fff',
                   textDecoration: 'none',
-                  fontSize: '1.1rem',
+                  fontSize: 'clamp(0.9rem, 2vw, 1.1rem)',
                   fontWeight: 700,
                   borderRadius: '8px',
                   display: 'inline-block',
                   boxShadow: '0 10px 40px rgba(59,130,246,0.3)',
+                  wordBreak: 'break-all',
                 }}
               >
                 investors@whiteev.com

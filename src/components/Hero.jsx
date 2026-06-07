@@ -156,7 +156,7 @@ export default function Hero() {
         animate={{ opacity: 1, scale: 1, x: 0 }}
         transition={{ duration: 1.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
         style={{
-          position: 'absolute', top: '-80px', right: '-40px', width: '600px', height: '500px',
+          position: 'absolute', top: '-10%', right: '-5%', width: 'min(600px, 50vw)', height: 'min(500px, 40vw)',
           background: 'radial-gradient(ellipse, rgba(99,179,237,0.18) 0%, transparent 65%)',
           pointerEvents: 'none',
         }}
@@ -166,7 +166,7 @@ export default function Hero() {
         animate={{ opacity: 1, scale: 1, x: 0 }}
         transition={{ duration: 1.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
         style={{
-          position: 'absolute', bottom: '-60px', left: '-60px', width: '500px', height: '420px',
+          position: 'absolute', bottom: '-10%', left: '-5%', width: 'min(500px, 45vw)', height: 'min(420px, 35vw)',
           background: 'radial-gradient(ellipse, rgba(6,182,212,0.14) 0%, transparent 65%)',
           pointerEvents: 'none',
         }}

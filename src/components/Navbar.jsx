@@ -11,6 +11,7 @@ const links = [
 export default function Navbar({ onPageChange, currentPage }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -18,12 +19,20 @@ export default function Navbar({ onPageChange, currentPage }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   return (
     <>
       <div style={{
-        position: 'fixed', top: '1.25rem', left: 0, right: 0,
+        position: 'fixed', top: '0.75rem', left: 0, right: 0,
         zIndex: 1000, display: 'flex', justifyContent: 'center',
         pointerEvents: 'none',
+        padding: '0 0.5rem',
       }}>
         <motion.nav
           initial={{ opacity: 0, y: -20 }}
@@ -33,7 +42,7 @@ export default function Navbar({ onPageChange, currentPage }) {
             pointerEvents: 'auto',
             display: 'flex', alignItems: 'center',
             gap: '0.15rem',
-            padding: '0.3rem 0.4rem 0.3rem 0.8rem',
+            padding: isMobile ? '0.3rem 0.5rem 0.3rem 0.6rem' : '0.3rem 0.4rem 0.3rem 0.8rem',
             background: scrolled
               ? 'rgba(255,255,255,0.92)'
               : 'rgba(248,250,255,0.75)',
@@ -46,15 +55,28 @@ export default function Navbar({ onPageChange, currentPage }) {
               : '0 4px 20px rgba(15,23,42,0.07), inset 0 1px 0 rgba(255,255,255,0.8)',
             transition: 'background 0.5s, box-shadow 0.5s',
             whiteSpace: 'nowrap',
+            width: isMobile ? 'auto' : 'auto',
+            maxWidth: isMobile ? 'calc(100vw - 1rem)' : 'none',
           }}
         >
           {/* Logo */}
-          <a href="#" onClick={(e) => { e.preventDefault(); onPageChange?.('home'); }} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', marginRight: '1.25rem', cursor: 'pointer' }}>
-            <img src="/EvLogo.png" alt="White EV" style={{ height: '48px', width: 'auto', borderRadius: '8px', display: 'block' }} />
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              if (isMobile) {
+                setMenuOpen(v => !v);
+              } else {
+                onPageChange?.('home');
+              }
+            }}
+            style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', marginRight: isMobile ? '0.3rem' : '1.25rem', cursor: 'pointer', flexShrink: 0 }}
+          >
+            <img src="/EvLogo.png" alt="White EV" style={{ height: isMobile ? '32px' : '48px', width: 'auto', borderRadius: '8px', display: 'block' }} />
           </a>
 
           {/* Desktop links */}
-          <div className="hidden md:flex" style={{ display: 'flex', gap: '0.1rem', alignItems: 'center' }}>
+          {!isMobile && <div style={{ display: 'flex', gap: '0.1rem', alignItems: 'center' }}>
             {links.map(l => (
               <a
                 key={l.label}
@@ -102,12 +124,11 @@ export default function Navbar({ onPageChange, currentPage }) {
                 {l.label}
               </a>
             ))}
-          </div>
+          </div>}
 
           {/* CTA button */}
-          <a
+          {!isMobile && <a
             href="#"
-            className="hidden md:inline-flex"
             onClick={(e) => { e.preventDefault(); onPageChange?.('investors') }}
             style={{
               marginLeft: '0.6rem',
@@ -138,20 +159,20 @@ export default function Navbar({ onPageChange, currentPage }) {
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
               <path d="M2 6h8M7 3l3 3-3 3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          </a>
+          </a>}
 
           {/* Hamburger */}
-          <button
-            className="flex md:hidden"
+          {isMobile && <button
             onClick={() => setMenuOpen(v => !v)}
             style={{
-              marginLeft: '0.5rem',
+              marginLeft: 'auto',
               background: 'rgba(15,23,42,0.05)',
               border: '1px solid rgba(15,23,42,0.1)',
               borderRadius: '100px',
               padding: '7px 10px',
               flexDirection: 'column', gap: '4px',
               cursor: 'pointer',
+              flexShrink: 0,
             }}
           >
             {[0, 1, 2].map(i => (
@@ -167,13 +188,13 @@ export default function Navbar({ onPageChange, currentPage }) {
                 opacity: menuOpen && i === 1 ? 0 : 1,
               }} />
             ))}
-          </button>
+          </button>}
         </motion.nav>
       </div>
 
       {/* Mobile dropdown */}
       <AnimatePresence>
-        {menuOpen && (
+        {menuOpen && isMobile && (
           <motion.div
             initial={{ opacity: 0, y: -6, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -181,9 +202,11 @@ export default function Navbar({ onPageChange, currentPage }) {
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
             style={{
               position: 'fixed',
-              top: 'calc(1.25rem + 52px + 10px)',
-              left: '50%',
-              transform: 'translateX(-50%)',
+              top: 'calc(0.75rem + 46px + 8px)',
+              left: '0',
+              right: '0',
+              marginLeft: 'auto',
+              marginRight: 'auto',
               zIndex: 999,
               background: 'rgba(255,255,255,0.97)',
               backdropFilter: 'blur(28px)',
@@ -192,7 +215,8 @@ export default function Navbar({ onPageChange, currentPage }) {
               borderRadius: '20px',
               padding: '0.75rem',
               display: 'flex', flexDirection: 'column', gap: '0.15rem',
-              minWidth: '220px',
+              width: 'calc(100vw - 2rem)',
+              maxWidth: '280px',
               boxShadow: '0 20px 60px rgba(15,23,42,0.15)',
             }}
           >
@@ -230,6 +254,7 @@ export default function Navbar({ onPageChange, currentPage }) {
                   borderRadius: '12px',
                   transition: 'color 0.2s, background 0.2s',
                   cursor: 'pointer',
+                  textAlign: 'center',
                 }}
                 onMouseEnter={e => {
                   e.currentTarget.style.color = '#0F172A'
