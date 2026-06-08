@@ -183,7 +183,7 @@ export default function ProductFeatures() {
             gap: clamp(1.5rem, 3vw, 2rem);
           }
           .feature-visual-container {
-            padding: 0.5rem;
+            display: none !important;
           }
         }
       `}</style>
